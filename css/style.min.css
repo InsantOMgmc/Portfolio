@@ -12,6 +12,10 @@
     box-sizing: border-box
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: sans-serif;
     background: var(--primary-color, #0e1111);
@@ -26,6 +30,11 @@ body.lock {
     max-width: 1170px;
     padding: 0 15px;
     margin: 0 auto
+}
+
+.gsap-content,
+.gsap-wrapper {
+    overflow-x: hidden;
 }
 
 .burger {
@@ -104,8 +113,20 @@ body.lock {
     color: var(--secondary-color, #fff)
 }
 
+@media screen and (max-width: 768px) {
+    .section-title {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .section-title {
+        font-size: 32px;
+    }
+}
+
 .section-title--black {
-    color: var(--primary-color, #0e1111);
+    color: #999;
     font-size: 40px
 }
 
@@ -569,6 +590,12 @@ body.lock {
     flex-direction: column;
 }
 
+@media screen and (max-width: 768px) {
+    .projects__container {
+        max-width: 100%;
+    }
+}
+
 .projects__line {
     height: calc(100% - 100px);
     width: .15vw;
@@ -583,7 +610,6 @@ body.lock {
 .projects__item {
     /* flex: 1 1 31.5%; */
     cursor: pointer;
-    padding: 10px;
     max-width: 40vw;
     transition: all .3s ease-in-out
 }
@@ -630,6 +656,16 @@ body.lock {
     transform: translateX(calc(50% - (251.3px)));
 }
 
+@media screen and (max-width: 768px) {
+    .projects-item__date-point--left {
+        transform: translateX(calc(50% - (191px/2)));
+    }
+
+    .projects-item__date-point--right {
+        transform: translateX(calc(50% - (247.3px)));
+    }
+}
+
 .projects-item__date-point .point {
     position: relative;
     width: 25px;
@@ -659,6 +695,22 @@ body.lock {
     width: 132px;
 }
 
+@media screen and (max-width: 768px) {
+    .date-point__text {
+        font-size: 16px;
+    }
+
+    .projects-item__date-point .point {
+        width: 20px;
+        height: 20px;
+    }
+
+    .projects-item__date-point .point::after {
+        width: 6px;
+        height: 6px;
+    }
+}
+
 @media screen and (max-width: 570px) {
     .projects__item {
         flex: 1 1 100%
@@ -670,6 +722,12 @@ body.lock {
     aspect-ratio: 16/9;
     object-fit: cover;
     border-radius: 30px
+}
+
+@media screen and (max-width: 620px) {
+    .projects-item__banner {
+        border-radius: 10px
+    }
 }
 
 .projects-item__title {
@@ -732,12 +790,12 @@ body.lock {
 
 .skills__suptitle {
     font-family: "DM Sans", sans-serif;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 18px;
     line-height: 150%;
-    letter-spacing: -0.03em;
+    letter-spacing: 1.5px;
     text-align: center;
-    color: #171718;
+    color: #eee;
     margin: 20px 0
 }
 
@@ -762,7 +820,7 @@ body.lock {
     line-height: 150%;
     letter-spacing: -0.03em;
     text-align: center;
-    color: #171718;
+    color: #eee;
     text-decoration: none
 }
 

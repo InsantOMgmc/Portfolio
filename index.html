@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div class="wrapper gsap-wrapper">
+    <div class="wrapper gsap-wrapper" data-scroll-container>
         <div class="gsap-content">
 
             <header class="header">
@@ -998,28 +998,44 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollSmoother.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"
+        integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
     <script>
+
         document.addEventListener("DOMContentLoaded", () => {
-            gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-            if (ScrollTrigger.isTouch !== 1) {
-                ScrollSmoother.create({
-                    wrapper: '.gsap-wrapper',
-                    content: '.gsap-content',
-                    smooth: .8,
-                    effects: true,
-                })
-            }
+            SmoothScroll({
+                // Время скролла 400 = 0.4 секунды
+                animationTime: 700,
+                // Размер шага в пикселях
+                stepSize: 100,
+
+                // Дополнительные настройки:
+
+                // Поддержка клавиатуры
+                keyboardSupport: true,
+                // Шаг скролла стрелками на клавиатуре в пикселях
+                arrowScroll: 50,
+
+                // Pulse (less tweakable)
+                // ratio of "tail" to "acceleration"
+                pulseAlgorithm: true,
+                pulseScale: 4,
+                pulseNormalize: 1,
+
+                // Поддержка тачпада
+                touchpadSupport: true,
+            })
+            gsap.registerPlugin(ScrollTrigger);
             gsap.fromTo(
                 '.hero',
                 {
-                    opacity: 1
+                    opacity: 1,
                 },
                 {
                     opacity: 0,
                     scrollTrigger: {
                         trigger: ".hero",
-                        start: 'center center',
+                        start: 'top top',
                         scrub: true
                     }
                 }
@@ -1030,7 +1046,7 @@
                     element,
                     {
                         opacity: 0,
-                        x: -500
+                        x: -400,
                     },
                     {
                         x: 0,
@@ -1038,7 +1054,7 @@
                         scrollTrigger: {
                             trigger: element,
                             end: 'center center',
-                            scrub: true
+                            scrub: true,
                         }
                     }
                 );
@@ -1057,7 +1073,7 @@
                         scrollTrigger: {
                             trigger: element,
                             end: 'center center',
-                            scrub: true
+                            scrub: true,
                         }
                     }
                 );
@@ -1068,14 +1084,14 @@
                     element,
                     {
                         opacity: 0,
-                        x: 500
+                        x: 400,
                     },
                     {
                         x: 0,
                         opacity: 1,
                         scrollTrigger: {
                             trigger: element,
-                            end: 'center',
+                            end: 'center center',
                             scrub: true
                         }
                     }
