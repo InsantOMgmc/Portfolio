@@ -268,62 +268,127 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"
         integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"
+        integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
     <script>
 
-         window.onload = () => {
-        // Используем небольшой таймаут, чтобы дать странице прогрузиться перед плавным скроллом
-            setTimeout(() => {
-                SmoothScroll({
-                    animationTime: 700,
-                    stepSize: 100,
-                    keyboardSupport: true,
-                    arrowScroll: 50,
-                    pulseAlgorithm: true,
-                    pulseScale: 4,
-                    pulseNormalize: 1,
-                    touchpadSupport: true,
-                });
-            }, 100);
-        
+        document.addEventListener("DOMContentLoaded", () => {
+            SmoothScroll({
+                // Время скролла 400 = 0.4 секунды
+                animationTime: 700,
+                // Размер шага в пикселях
+                stepSize: 100,
+
+                // Дополнительные настройки:
+
+                // Поддержка клавиатуры
+                keyboardSupport: true,
+                // Шаг скролла стрелками на клавиатуре в пикселях
+                arrowScroll: 50,
+
+                // Pulse (less tweakable)
+                // ratio of "tail" to "acceleration"
+                pulseAlgorithm: true,
+                pulseScale: 4,
+                pulseNormalize: 1,
+
+                // Поддержка тачпада
+                touchpadSupport: true,
+            })
             gsap.registerPlugin(ScrollTrigger);
-        
             gsap.fromTo(
                 '.hero',
-                { opacity: 1 },
+                {
+                    opacity: 1,
+                },
                 {
                     opacity: 0,
                     scrollTrigger: {
                         trigger: ".hero",
                         start: 'top top',
-                        scrub: true,
-                        once: true, // Отключаем повторные срабатывания
+                        scrub: true
                     }
                 }
             );
-        
-            // Функция для анимации элементов с разными параметрами
-            function animateElements(selector, from, to) {
-                gsap.utils.toArray(selector).forEach(element => {
-                    gsap.fromTo(element, from, {
-                        ...to,
+            let projectsLeft = gsap.utils.toArray('.projects__item--left .projects-item__banner')
+            projectsLeft.forEach(element => {
+                gsap.fromTo(
+                    element,
+                    {
+                        opacity: 0,
+                        x: -400,
+                    },
+                    {
+                        x: 0,
+                        opacity: 1,
                         scrollTrigger: {
                             trigger: element,
                             end: 'center center',
                             scrub: true,
-                            once: true, // Отключает повторную анимацию
                         }
-                    });
-                });
-            }
-        
-            // Анимации для блоков слева
-            animateElements('.projects__item--left .projects-item__banner', { opacity: 0, x: -400 }, { x: 0, opacity: 1 });
-            animateElements('.projects__item--left .projects-item__stack-container', { opacity: 0, x: -100 }, { x: 0, opacity: 1 });
-        
-            // Анимации для блоков справа
-            animateElements('.projects__item--right .projects-item__banner', { opacity: 0, x: 400 }, { x: 0, opacity: 1 });
-            animateElements('.projects__item--right .projects-item__stack-container', { opacity: 0, x: 100 }, { x: 0, opacity: 1 });
-        };
+                    }
+                );
+            });
+            let projectsLeftStack = gsap.utils.toArray('.projects__item--left .projects-item__stack-container')
+            projectsLeftStack.forEach(element => {
+                gsap.fromTo(
+                    element,
+                    {
+                        opacity: 0,
+                        x: -100,
+                    },
+                    {
+                        x: 0,
+                        opacity: 1,
+                        scrollTrigger: {
+                            trigger: element,
+                            end: 'center center',
+                            scrub: true,
+                        }
+                    }
+                );
+            });
+            let projectsRight = gsap.utils.toArray('.projects__item--right .projects-item__banner')
+            projectsRight.forEach(element => {
+                gsap.fromTo(
+                    element,
+                    {
+                        opacity: 0,
+                        x: 400,
+                    },
+                    {
+                        x: 0,
+                        opacity: 1,
+                        scrollTrigger: {
+                            trigger: element,
+                            end: 'center center',
+                            scrub: true
+                        }
+                    }
+                );
+            });
+            let projectsRightStack = gsap.utils.toArray('.projects__item--right .projects-item__stack-container')
+            projectsRightStack.forEach(element => {
+                gsap.fromTo(
+                    element,
+                    {
+                        opacity: 0,
+                        x: 100,
+                    },
+                    {
+                        x: 0,
+                        opacity: 1,
+                        scrollTrigger: {
+                            trigger: element,
+                            end: 'center center',
+                            scrub: true
+                        }
+                    }
+                );
+            });
+        })
     </script>
 
     <script src="js/main.min.js"></script>
